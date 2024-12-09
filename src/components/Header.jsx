@@ -1,16 +1,19 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Index";
 
 
 export default function Header() {
   const {user,signOutUser} = useContext(AuthContext)
+
+  const navigate = useNavigate();
   console.log(user);
 
   const clickhandler = () => {
     signOutUser()
     .then(() => {
       console.log("user is logged out");
+      navigate('/login')
       
     }) .catch((err) => {
       console.log(err);
@@ -53,7 +56,11 @@ export default function Header() {
           <li><Link to={"/login"}>Login</Link></li>
 
           {
-            user && <li><Link to={"/orders"}>orders</Link></li>
+            user && <>
+            
+            <li><Link to={"/profile"}>Profile</Link></li>
+            <li><Link to={"/orders"}>orders</Link></li>
+            </> 
           }
           
         </ul>

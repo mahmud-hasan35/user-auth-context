@@ -1,12 +1,14 @@
 import { useContext, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { IoIosEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/Index";
 
 export default function Login() {
 
   const {signUser} = useContext(AuthContext);
+
+  const navigate = useNavigate()
 
 
   const [show, setShow] = useState(false)
@@ -22,6 +24,7 @@ export default function Login() {
     signUser(email, password)
     .then((result) => {
       console.log(result);
+      navigate('/')
     })
     .catch((error) => {
       console.log(error);
